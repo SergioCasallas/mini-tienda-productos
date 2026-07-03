@@ -52,6 +52,7 @@ export const RootNavigator = () => {
         screenOptions={{
           tabBarActiveTintColor: '#2563eb',
           tabBarInactiveTintColor: '#6b7280',
+          popToTopOnBlur: true,
         }}
       >
         <Tab.Screen
