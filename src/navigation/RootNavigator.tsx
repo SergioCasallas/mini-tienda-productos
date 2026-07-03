@@ -28,6 +28,23 @@ const ProductsStack = () => {
   );
 };
 
+const FavoritesStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="Favorites" 
+        component={FavoritesScreen} 
+        options={{ title: 'Favoritos' }} 
+      />
+      <Stack.Screen 
+        name="ProductDetail" 
+        component={ProductDetailScreen} 
+        options={{ title: 'Detalle' }} 
+      />
+    </Stack.Navigator>
+  );
+};
+
 export const RootNavigator = () => {
   return (
     <NavigationContainer>
@@ -50,8 +67,9 @@ export const RootNavigator = () => {
         />
         <Tab.Screen
           name="FavoritesTab"
-          component={FavoritesScreen}
+          component={FavoritesStack}
           options={{
+            headerShown: false,
             title: 'Favoritos',
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="heart-outline" size={size} color={color} />

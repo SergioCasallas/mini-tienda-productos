@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import { View, FlatList, ListRenderItem } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useFavoritesStore } from '../store/favoritesStore';
 import { ProductListItem } from '../components/ProductListItem';
 import { EmptyState } from '../components/EmptyState';
 import { Product } from '../types';
-import { BottomTabParamList } from '../navigation/types';
+import { RootStackParamList } from '../navigation/types';
 
-type NavigationProp = BottomTabNavigationProp<BottomTabParamList, 'FavoritesTab'>;
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Favorites'>;
 
 export const FavoritesScreen: React.FC = () => {
   const favorites = useFavoritesStore((state) => state.favorites);
@@ -16,11 +16,7 @@ export const FavoritesScreen: React.FC = () => {
 
   const handlePress = useCallback((id: number) => {
     console.log('handlePress', id);
-    navigation.navigate('ProductsTab', {
-      screen: 'ProductDetail',
-      params: { id },
-    });
-
+    navigation.navigate('ProductDetail', { id });
   }, [navigation]);
 
   const renderItem: ListRenderItem<Product> = useCallback(({ item }) => {
