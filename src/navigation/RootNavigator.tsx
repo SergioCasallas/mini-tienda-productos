@@ -1,0 +1,60 @@
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { RootStackParamList, BottomTabParamList } from './types';
+import { ProductListScreen } from '../screens/ProductListScreen';
+import { ProductDetailScreen } from '../screens/ProductDetailScreen';
+import { FavoritesScreen } from '../screens/FavoritesScreen';
+import { Text } from 'react-native';
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator<BottomTabParamList>();
+
+const ProductsStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="ProductList" 
+        component={ProductListScreen} 
+        options={{ title: 'Productos' }} 
+      />
+      <Stack.Screen 
+        name="ProductDetail" 
+        component={ProductDetailScreen} 
+        options={{ title: 'Detalle' }} 
+      />
+    </Stack.Navigator>
+  );
+};
+
+export const RootNavigator = () => {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: '#2563eb',
+          tabBarInactiveTintColor: '#6b7280',
+        }}
+      >
+        <Tab.Screen
+          name="ProductsTab"
+          component={ProductsStack}
+          options={{
+            headerShown: false,
+            title: 'Inicio',
+            tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>🏠</Text>,
+          }}
+        />
+        <Tab.Screen
+          name="FavoritesTab"
+          component={FavoritesScreen}
+          options={{
+            title: 'Favoritos',
+            tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>♥</Text>,
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+};
