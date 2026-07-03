@@ -47,7 +47,11 @@ export const FavoritesScreen: React.FC = () => {
   }, [navigation]);
 
   const renderItem: ListRenderItem<Product> = useCallback(({ item }) => {
-    return <ProductListItem product={item} onPress={handlePress} />;
+    return (
+      <View className="mx-4 mb-3">
+        <ProductListItem product={item} onPress={handlePress} isFavorite={false} />
+      </View>
+    );
   }, [handlePress]);
 
   return (

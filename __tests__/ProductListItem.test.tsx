@@ -20,14 +20,22 @@ describe('ProductListItem', () => {
 
   it('renders correctly and responds to press', () => {
     const onPressMock = jest.fn();
-    const { getByText } = render(
+    const { getByText, queryByTestId } = render(
       <ProductListItem product={mockProduct} onPress={onPressMock} />
     );
 
     expect(getByText('Test Product')).toBeTruthy();
     expect(getByText('$19.99')).toBeTruthy();
+    expect(queryByTestId('favorite-icon')).toBeNull();
 
     fireEvent.press(getByText('Test Product'));
     expect(onPressMock).toHaveBeenCalledWith(1);
+  });
+
+  it('renders heart icon when isFavorite is true', () => {
+    const { getByTestId } = render(
+      <ProductListItem product={mockProduct} onPress={jest.fn()} isFavorite={true} />
+    );
+    expect(getByTestId('favorite-icon')).toBeTruthy();
   });
 });
