@@ -6,7 +6,7 @@ import { RootStackParamList, BottomTabParamList } from './types';
 import { ProductListScreen } from '../screens/ProductListScreen';
 import { ProductDetailScreen } from '../screens/ProductDetailScreen';
 import { FavoritesScreen } from '../screens/FavoritesScreen';
-import { Text } from 'react-native';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<BottomTabParamList>();
@@ -14,15 +14,15 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 const ProductsStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen 
-        name="ProductList" 
-        component={ProductListScreen} 
-        options={{ title: 'Productos' }} 
+      <Stack.Screen
+        name="ProductList"
+        component={ProductListScreen}
+        options={{ title: 'Productos' }}
       />
-      <Stack.Screen 
-        name="ProductDetail" 
-        component={ProductDetailScreen} 
-        options={{ title: 'Detalle' }} 
+      <Stack.Screen
+        name="ProductDetail"
+        component={ProductDetailScreen}
+        options={{ title: 'Detalle' }}
       />
     </Stack.Navigator>
   );
@@ -43,7 +43,9 @@ export const RootNavigator = () => {
           options={{
             headerShown: false,
             title: 'Inicio',
-            tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>🏠</Text>,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="home-outline" size={size} color={color} />
+            ),
           }}
         />
         <Tab.Screen
@@ -51,10 +53,13 @@ export const RootNavigator = () => {
           component={FavoritesScreen}
           options={{
             title: 'Favoritos',
-            tabBarIcon: ({ color }) => <Text style={{ color, fontSize: 20 }}>♥</Text>,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="heart-outline" size={size} color={color} />
+            ),
           }}
         />
       </Tab.Navigator>
     </NavigationContainer>
   );
 };
+

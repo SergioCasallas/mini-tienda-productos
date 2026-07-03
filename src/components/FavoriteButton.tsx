@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
   withSequence,
+  withTiming,
 } from 'react-native-reanimated';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 
 interface FavoriteButtonProps {
   isFavorite: boolean;
@@ -19,13 +21,14 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({ isFavorite, onPr
   useEffect(() => {
     if (isFavorite) {
       scale.value = withSequence(
-        withSpring(1.5, { damping: 2, stiffness: 80 }),
-        withSpring(1, { damping: 4, stiffness: 40 })
+        withTiming(1.4, { duration: 150 }),
+        withSpring(1, { damping: 15, stiffness: 150 })
       );
     } else {
       scale.value = withSpring(1);
     }
   }, [isFavorite, scale]);
+
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -36,10 +39,13 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({ isFavorite, onPr
   return (
     <TouchableOpacity onPress={onPress} className="p-2" activeOpacity={0.7}>
       <Animated.View style={animatedStyle}>
-        <Text className={`text-2xl ${isFavorite ? 'text-red-500' : 'text-gray-400'}`}>
-          {isFavorite ? '♥' : '♡'}
-        </Text>
+        <Ionicons
+          name={isFavorite ? 'heart' : 'heart-outline'}
+          size={28}
+          color={isFavorite ? '#ef4444' : '#9ca3af'}
+        />
       </Animated.View>
     </TouchableOpacity>
   );
 };
+

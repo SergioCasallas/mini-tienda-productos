@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 
 interface ErrorStateProps {
   message: string;
@@ -8,7 +9,8 @@ interface ErrorStateProps {
 
 export const ErrorState: React.FC<ErrorStateProps> = ({ message, onRetry }) => {
   return (
-    <View className="flex-1 justify-center items-center p-4">
+    <View className="flex-1 justify-center items-center p-6">
+      <Ionicons name="alert-circle-outline" size={48} color="#ef4444" style={{ marginBottom: 12 }} />
       <Text className="text-red-500 text-lg text-center mb-4 font-semibold">
         {message}
       </Text>
@@ -21,3 +23,4 @@ export const ErrorState: React.FC<ErrorStateProps> = ({ message, onRetry }) => {
     </View>
   );
 };
+

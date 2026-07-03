@@ -7,6 +7,7 @@ import { ImageCarousel } from '../components/ImageCarousel';
 import { SkeletonLoader } from '../components/SkeletonLoader';
 import { ErrorState } from '../components/ErrorState';
 import { FavoriteButton } from '../components/FavoriteButton';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 
 export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ route }) => {
   const { id } = route.params;
@@ -53,7 +54,7 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ route 
         </Text>
 
         <View className="flex-row items-center mb-6">
-          <Text className="text-yellow-500 text-lg mr-1">★</Text>
+          <Ionicons name="star" size={18} color="#eab308" style={{ marginRight: 4 }} />
           <Text className="text-gray-600 text-base">{product.rating} / 5</Text>
         </View>
 
@@ -65,3 +66,4 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ route 
     </ScrollView>
   );
 };
+
