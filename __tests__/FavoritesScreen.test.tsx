@@ -7,6 +7,7 @@ import { useFavoritesStore } from '../src/store/favoritesStore';
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({
     navigate: jest.fn(),
+    setOptions: jest.fn(),
   }),
 }));
 

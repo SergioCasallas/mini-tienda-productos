@@ -24,6 +24,7 @@ interface FavoritesState {
   removeFavorite: (productId: number) => void;
   toggleFavorite: (product: Product) => void;
   isFavorite: (productId: number) => boolean;
+  clearFavorites: () => void;
 }
 
 export const useFavoritesStore = create<FavoritesState>()(
@@ -32,7 +33,7 @@ export const useFavoritesStore = create<FavoritesState>()(
       favorites: [],
       addFavorite: (product) => set((state) => ({ favorites: [...state.favorites, product] })),
       removeFavorite: (productId) =>
-        set((state) => ({ favorites: state.favorites.filter((p) => p.id !== productId) })),
+          set((state) => ({ favorites: state.favorites.filter((p) => p.id !== productId) })),
       toggleFavorite: (product) => {
         const { isFavorite, addFavorite, removeFavorite } = get();
         if (isFavorite(product.id)) {
@@ -42,6 +43,7 @@ export const useFavoritesStore = create<FavoritesState>()(
         }
       },
       isFavorite: (productId) => get().favorites.some((p) => p.id === productId),
+      clearFavorites: () => set({ favorites: [] }),
     }),
     {
       name: 'favorites-store',

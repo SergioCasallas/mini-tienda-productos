@@ -13,7 +13,6 @@ export interface ApiError {
 
 apiClient.interceptors.request.use(
   (config) => {
-    // You can add auth tokens or logging here
     return config;
   },
   (error) => Promise.reject(error)

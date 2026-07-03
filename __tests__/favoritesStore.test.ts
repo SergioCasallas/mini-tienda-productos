@@ -54,4 +54,13 @@ describe('favoritesStore', () => {
     useFavoritesStore.getState().toggleFavorite(mockProduct); // Removes it
     expect(useFavoritesStore.getState().favorites).toHaveLength(0);
   });
+
+  it('should clear all favorites', () => {
+    useFavoritesStore.getState().addFavorite(mockProduct);
+    useFavoritesStore.getState().addFavorite({ ...mockProduct, id: 2, title: 'Product 2' });
+    expect(useFavoritesStore.getState().favorites).toHaveLength(2);
+    
+    useFavoritesStore.getState().clearFavorites();
+    expect(useFavoritesStore.getState().favorites).toHaveLength(0);
+  });
 });
