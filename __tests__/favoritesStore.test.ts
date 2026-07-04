@@ -63,4 +63,16 @@ describe('favoritesStore', () => {
     useFavoritesStore.getState().clearFavorites();
     expect(useFavoritesStore.getState().favorites).toHaveLength(0);
   });
+
+  it('should remove multiple products from favorites', () => {
+    useFavoritesStore.getState().addFavorite(mockProduct);
+    useFavoritesStore.getState().addFavorite({ ...mockProduct, id: 2, title: 'Product 2' });
+    useFavoritesStore.getState().addFavorite({ ...mockProduct, id: 3, title: 'Product 3' });
+    expect(useFavoritesStore.getState().favorites).toHaveLength(3);
+
+    useFavoritesStore.getState().removeMultipleFavorites([1, 3]);
+    const { favorites } = useFavoritesStore.getState();
+    expect(favorites).toHaveLength(1);
+    expect(favorites[0].id).toBe(2);
+  });
 });

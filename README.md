@@ -3,9 +3,23 @@
 Una aplicación de React Native creada con Expo, TypeScript y Bun, que cumple con los requisitos de la prueba técnica para una mini-tienda de productos.
 
 ## Requisitos previos
-- **Node.js** (LTS) - Requerido por algunas herramientas de Expo y para la configuración inicial.
-- **Bun** (>= 1.0) - Gestor de paquetes y ejecutor de scripts oficial del proyecto.
-- **Expo CLI** - Para correr el proyecto de forma local.
+
+Para poder instalar y compilar el proyecto sin inconvenientes, es sumamente importante contar con las siguientes versiones de software en tu entorno:
+
+### 1. Entorno de Ejecución y Gestión de Paquetes
+* **Bun** (`>= 1.1.0`): Gestor de paquetes principal del proyecto.
+* **Node.js** (`>= 22.13.0` LTS o `v20.x` LTS): Requerido de forma obligatoria por herramientas internas de Expo CLI para el prebuild y dependencias nativas.
+
+### 2. Para Compilación de Android (Windows, macOS, Linux)
+* **JDK (Java Development Kit)**: **JDK 17**. React Native `0.86` y Expo SDK `57` están estandarizados bajo esta versión. *(Evita JDK 21 o superiores, ya que pueden causar incompatibilidad con Gradle).*
+* **Android Studio & SDK**:
+  * Android SDK Command-line Tools y SDK Platform 35 (o la correspondiente al target del proyecto).
+  * Variables de entorno configuradas (`ANDROID_HOME` y rutas de `platform-tools` en el `PATH`).
+
+### 3. Para Compilación de iOS (Solo macOS)
+* **macOS** actualizado.
+* **Xcode** (`>= 16.0`): Para soporte completo del SDK de iOS actual.
+* **CocoaPods** (`>= 1.15.0`): Requerido para instalar los pods nativos del proyecto.
 
 ## Tecnologías principales
 - **Expo (Managed Workflow)**: Configuración rápida y acceso a APIs nativas.
@@ -24,13 +38,43 @@ bun install
 ```
 
 ## Ejecución del proyecto
-Para iniciar el entorno de desarrollo:
+
+> [!IMPORTANT]
+> Este proyecto utiliza librerías nativas como `react-native-mmkv`, por lo que **no se puede ejecutar en la aplicación estándar de Expo Go**. Es necesario generar y compilar un build de desarrollo nativo.
+
+Sigue las instrucciones correspondientes según tu sistema operativo y plataforma:
+
+### 1. Requisitos para Compilación Nativa
+* **Android (Windows, macOS, Linux):**
+  * Android Studio instalado.
+  * SDK de Android y variables de entorno configuradas (`ANDROID_HOME`).
+  * Un emulador de Android configurado o un dispositivo físico conectado con depuración USB habilitada.
+* **iOS (Sólo en macOS):**
+  * Xcode instalado.
+  * Herramientas de línea de comandos de Xcode y CocoaPods instalados.
+
+### 2. Comandos de Ejecución
+
+#### Para Android (Windows, macOS, Linux)
+Compila el código nativo, genera el build de desarrollo e instálalo en tu emulador o dispositivo físico:
+```bash
+bun expo run:android
+# o alternativamente:
+bun android
+```
+
+#### Para iOS (Sólo macOS)
+Instala las dependencias de CocoaPods y compila en el simulador de iOS:
+```bash
+bun expo run:ios
+# o alternativamente:
+bun ios
+```
+
+Una vez que la aplicación nativa de desarrollo esté instalada en tu emulador o dispositivo, en las siguientes sesiones puedes iniciar únicamente el servidor de desarrollo de Metro usando:
 ```bash
 bun start
 ```
-- Presiona `a` para abrir en un emulador de Android.
-- Presiona `i` para abrir en el simulador de iOS (requiere macOS y Xcode).
-- Escanea el código QR con la app **Expo Go** en tu dispositivo físico.
 
 ## Scripts de prueba
 Para ejecutar la suite de pruebas unitarias y de componentes:

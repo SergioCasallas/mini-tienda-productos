@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import { render, fireEvent } from '@testing-library/react-native';
 import { FavoritesScreen } from '../src/screens/FavoritesScreen';
 import { useFavoritesStore } from '../src/store/favoritesStore';
 
@@ -42,5 +42,38 @@ describe('FavoritesScreen', () => {
 
     const { getByText } = render(<FavoritesScreen />);
     expect(getByText('Favorite Product')).toBeTruthy();
+  });
+
+  it('selects item on long press and deselects on second press', () => {
+    const mockProduct = {
+      id: 1,
+      title: 'Favorite Product',
+      description: 'Desc',
+      price: 10,
+      discountPercentage: 0,
+      rating: 5,
+      stock: 10,
+      brand: 'Brand',
+      category: 'Cat',
+      thumbnail: 'thumb.jpg',
+      images: [],
+    };
+    useFavoritesStore.setState({ favorites: [mockProduct] });
+
+    const { getByText, queryByTestId, getByTestId } = render(<FavoritesScreen />);
+    const item = getByText('Favorite Product');
+
+    // Initially not selected
+    expect(queryByTestId('select-indicator')).toBeNull();
+
+    // Long press to enter selection mode
+    fireEvent(item, 'longPress');
+
+    // Should show checkmark select-indicator
+    expect(getByTestId('select-indicator')).toBeTruthy();
+
+    // Press again to deselect
+    fireEvent.press(item);
+    expect(queryByTestId('select-indicator')).toBeNull();
   });
 });
