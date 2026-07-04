@@ -103,6 +103,7 @@ export const SwipeableRow: React.FC<SwipeableRowProps> = ({
       </Animated.View>
 
       <Animated.View
+        testID="swipeable-row-content"
         style={{
           transform: [{ translateX: pan.x }],
         }}

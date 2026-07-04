@@ -75,4 +75,12 @@ describe('favoritesStore', () => {
     expect(favorites).toHaveLength(1);
     expect(favorites[0].id).toBe(2);
   });
+
+  it('should call removeItem in store persist storage', () => {
+    const storageOption = useFavoritesStore.persist.getOptions().storage;
+    expect(storageOption).toBeTruthy();
+    if (storageOption && storageOption.removeItem) {
+      storageOption.removeItem('favorites-store');
+    }
+  });
 });

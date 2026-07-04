@@ -37,4 +37,12 @@ describe('authStore', () => {
     expect(isLoggedIn).toBe(false);
     expect(username).toBeNull();
   });
+
+  it('should call removeItem in store persist storage', () => {
+    const storageOption = useAuthStore.persist.getOptions().storage;
+    expect(storageOption).toBeTruthy();
+    if (storageOption && storageOption.removeItem) {
+      storageOption.removeItem('auth-store');
+    }
+  });
 });

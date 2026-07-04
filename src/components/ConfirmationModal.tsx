@@ -35,12 +35,14 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
       onRequestClose={onClose}
     >
       <Pressable 
+        testID="modal-backdrop"
         className="flex-1 bg-black/40 justify-center items-center p-6"
         onPress={onClose}
       >
         <Pressable 
+          testID="modal-content"
           className="bg-white w-full max-w-sm rounded-2xl p-6 shadow-xl items-center"
-          onPress={(e) => e.stopPropagation()}
+          onPress={(e) => e?.stopPropagation()}
         >
           <View className={`${iconBgColor} p-4 rounded-full mb-4`}>
             <Ionicons name={iconName as any} size={32} color={iconColor} />
