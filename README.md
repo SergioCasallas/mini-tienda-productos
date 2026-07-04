@@ -93,6 +93,18 @@ bunx jest
 - `src/store/` - Estado global (Zustand) configurado con el middleware persist sobre MMKV.
 - `src/types/` - Interfaces de TypeScript compartidas.
 
+## Funcionalidades Extra (Pluses)
+
+Con el fin de elevar la experiencia de usuario (UX) y demostrar prácticas avanzadas en el desarrollo con React Native, se incorporaron las siguientes características adicionales al alcance básico de la prueba:
+
+- **Autenticación Demo y Flujo Protegido**: Se creó un flujo condicional de navegación protegido ([RootNavigator.tsx](file:///home/sergiocasallas/Documents/mini-tienda-productos/src/navigation/RootNavigator.tsx)) gestionado por un store de autenticación ([authStore.ts](file:///home/sergiocasallas/Documents/mini-tienda-productos/src/store/authStore.ts)) persistido con MMKV. Permite iniciar sesión simulando latencia de red y cerrar sesión con confirmación visual.
+- **Gesto de Deslizamiento Rápido (Swipe to Favorite)**: Permite deslizar los elementos de la lista hacia la derecha para marcarlos/desmarcarlos como favoritos instantáneamente. Creado a través de [SwipeableRow.tsx](file:///home/sergiocasallas/Documents/mini-tienda-productos/src/components/SwipeableRow.tsx) utilizando las APIs nativas `PanResponder` y `Animated`.
+- **Modo de Selección Múltiple y Borrado en Lote**: En la pantalla de favoritos, una pulsación larga sobre un ítem activa el modo de edición por lotes. La barra superior (Header) cambia para reflejar la cantidad seleccionada y permite borrarlos masivamente.
+- **Skeletons de Carga Animados (Shimmer Effect)**: Se reemplazaron los cargadores predeterminados por marcadores de posición animados ([SkeletonLoader.tsx](file:///home/sergiocasallas/Documents/mini-tienda-productos/src/components/SkeletonLoader.tsx)) usando `react-native-reanimated` para una carga visual agradable.
+- **Notificaciones Toast Flotantes**: Mensajes dinámicos que entran y salen flotando en la pantalla ([Toast.tsx](file:///home/sergiocasallas/Documents/mini-tienda-productos/src/components/Toast.tsx)) para notificar inmediatamente al usuario cada vez que agrega o quita favoritos.
+- **Modales de Confirmación**: Se implementó un componente reutilizable [ConfirmationModal.tsx](file:///home/sergiocasallas/Documents/mini-tienda-productos/src/components/ConfirmationModal.tsx) para asegurar acciones críticas como cerrar sesión o eliminar productos favoritos.
+- **Interceptor Global de API**: Configuración de Axios en [client.ts](file:///home/sergiocasallas/Documents/mini-tienda-productos/src/api/client.ts) para centralizar la captura y el formateo estandarizado de los errores de red.
+
 ## Decisiones Técnicas
 - **Bun**: Se eligió como gestor de paquetes principal por su alta velocidad de resolución y ejecución, garantizando tiempos de instalación mínimos.
 - **Zustand + MMKV**: Zustand ofrece una API limpia y sin boilerplate para el manejo de estados globales, mientras que MMKV proporciona persistencia síncrona en C++, siendo exponencialmente más rápido que AsyncStorage.
