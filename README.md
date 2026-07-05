@@ -112,3 +112,7 @@ Con el fin de elevar la experiencia de usuario (UX) y demostrar prácticas avanz
 - **Axios Global**: Un único cliente Axios con un interceptor nos asegura que errores como "Network Error" se capturen de forma global, retornando siempre un objeto predecible a nuestros hooks.
 - **NativeWind**: Utilizar las clases de utilidad de Tailwind mejora la legibilidad de la vista, manteniendo el estilo acoplado al JSX y evitando grandes archivos de StyleSheet (se reservó el uso de StyleSheet solo cuando es estrictamente necesario, como integraciones específicas de animación).
 - **Optimización de renders**: Se implementó `React.memo` para los elementos de las listas (`ProductListItem`) y se evitó la instanciación innecesaria de funciones anónimas inline, mejorando el performance del `FlatList`. Se implementó también `getItemLayout` para que FlatList sepa la altura de los ítems de antemano.
+
+## Coverage
+
+<img width="729" height="468" alt="annotate-2026-07-04_23-01-53" src="https://github.com/user-attachments/assets/6d731d61-6d1d-42b6-ab67-d1a5167a6e6b" />
