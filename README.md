@@ -32,7 +32,14 @@ Para poder instalar y compilar el proyecto sin inconvenientes, es sumamente impo
 - **Jest + Testing Library**: Entorno de pruebas configurado.
 
 ## Instalación
-Instala todas las dependencias usando Bun:
+
+1. Clona el repositorio:
+```bash
+git clone https://github.com/SergioCasallas/mini-tienda-productos.git
+cd mini-tienda-productos
+```
+
+2. Instala todas las dependencias usando Bun:
 ```bash
 bun install
 ```
