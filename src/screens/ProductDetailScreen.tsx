@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { ProductDetailScreenProps } from '../navigation/types';
 import { useProductDetail } from '../hooks/useProductDetail';
@@ -8,12 +8,17 @@ import { SkeletonLoader } from '../components/SkeletonLoader';
 import { ErrorState } from '../components/ErrorState';
 import { FavoriteButton } from '../components/FavoriteButton';
 import { Ionicons } from '@react-native-vector-icons/ionicons';
+import { SuggestedProducts } from '../components/SuggestedProducts';
 
-export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ route }) => {
+export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ route, navigation }) => {
   const { id } = route.params;
   const { product, isLoading, error, refetch } = useProductDetail(id);
   const isFavorite = useFavoritesStore((state) => state.isFavorite(id));
   const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
+
+  const handlePressSuggested = useCallback((suggestedId: number) => {
+    navigation.push('ProductDetail', { id: suggestedId });
+  }, [navigation]);
 
   if (isLoading) {
     return (
@@ -48,7 +53,7 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ route 
             onPress={() => toggleFavorite(product)}
           />
         </View>
-
+ 
         <Text className="text-green-600 text-xl font-bold mb-4">
           ${product.price.toFixed(2)}
         </Text>
@@ -63,7 +68,13 @@ export const ProductDetailScreen: React.FC<ProductDetailScreenProps> = ({ route 
           {product.description}
         </Text>
       </View>
+
+      <SuggestedProducts
+        currentProductId={product.id}
+        onPressProduct={handlePressSuggested}
+      />
     </ScrollView>
   );
 };
+
 

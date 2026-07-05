@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, FlatList, ListRenderItem, TouchableOpacity } from 'react-native';
+import { View, FlatList, ListRenderItem, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useFavoritesStore } from '../store/favoritesStore';
@@ -114,6 +114,18 @@ export const FavoritesScreen: React.FC = () => {
     );
   }, [handlePress, handleLongPress, selectedIds]);
 
+  const renderHeader = useCallback(() => {
+    if (favorites.length === 0) return null;
+    return (
+      <View className="bg-blue-50/70 border border-blue-100 rounded-xl p-4 mb-2 mx-4 flex-row items-center">
+        <Ionicons name="information-circle-outline" size={24} color="#2563eb" style={{ marginRight: 12 }} />
+        <Text className="text-xs text-blue-800 flex-1 leading-relaxed">
+          <Text className="font-bold">Cómo eliminar:</Text> Mantén presionado un producto para seleccionarlo, marca los que desees y toca el ícono del basurero arriba a la derecha. Para eliminar todos a la vez, toca el ícono del basurero directamente sin seleccionar ninguno.
+        </Text>
+      </View>
+    );
+  }, [favorites.length]);
+
   return (
     <View className="flex-1 bg-gray-50">
       <FlatList
@@ -121,6 +133,7 @@ export const FavoritesScreen: React.FC = () => {
         extraData={selectedIds}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
+        ListHeaderComponent={renderHeader}
         contentContainerStyle={{ paddingVertical: 16 }}
         ListEmptyComponent={<EmptyState message="No tienes productos favoritos aún" />}
       />
