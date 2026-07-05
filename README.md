@@ -33,6 +33,15 @@ Para poder instalar y compilar el proyecto sin inconvenientes, es sumamente impo
 
 ## Instalación
 
+### Guía de Instalación en Video
+Puedes ver el siguiente video tutorial para guiarte en el proceso de instalación y configuración:
+
+[![Guía de Instalación en Video](https://img.youtube.com/vi/fOneuvPOxfE/0.jpg)](https://youtu.be/fOneuvPOxfE)
+
+---
+
+### Pasos para la instalación local:
+
 1. Clona el repositorio:
 ```bash
 git clone https://github.com/SergioCasallas/mini-tienda-productos.git
@@ -43,6 +52,7 @@ cd mini-tienda-productos
 ```bash
 bun install
 ```
+
 
 ## Ejecución del proyecto
 
